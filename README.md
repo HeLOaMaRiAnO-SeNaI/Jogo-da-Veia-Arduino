@@ -8,4 +8,4 @@ nenhum jogador ganha e o jogo dá velha*
 
 **Como Funciona:**
 *Cria uma matriz de 3x3, e os jogadores são identificados pelos números 1 e 2, o valor inicial da matriz é 0 e em cada jogada dos jogares os espaços 
-que forem sendo respectivamente ocupados, será posto o número que representa cada jogador sendo os números 1 e2*
+que forem sendo respectivamente ocupados, será posto o número que representa cada jogador sendo os números 1 e 2*

@@ -85,7 +85,7 @@
             </do>
             <if expression="Velha &lt;= 9">
                 <then>
-                    <output expression="&quot;Parabens pela Vit&#243;ria da Terceira Idade Veio&quot; &amp; JogadordaVez" newline="True"/>
+                    <output expression="&quot;Parabens pela Vit&#243;ria da Terceira Idade Veio&quot; &amp; VeindaVez" newline="True"/>
                 </then>
                 <else>
                     <output expression="&quot;DEU VEIA!!!&quot;" newline="True"/>

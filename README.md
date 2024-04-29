@@ -1,5 +1,6 @@
 # Jogo-da-Veia-Arduino - Briefing
 **Data:** *29/04/2024*
+
 *O jogo da velha é praticamente onde dois jogadores jogam em um tabuleiro de 3 por 3, um dos jogadores fica com o X e o outro com o circulo, e quem tiver 
 tres dessas formas uma atrás da outra sendo em horizontais, verticais ou diagonais esse jogador ira ganhar, mas se não tiver nenhuma marcação uma atrás da outra com X ou Circulo 
 nenhum jogador ganha e o jogo dá velha*

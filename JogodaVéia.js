@@ -1,128 +1,128 @@
-﻿function main() {
-    // Criar um tabulero e os jogadores, zerar as variáveis.
+function main() {
+    // Criar o tabuleiro e jogadores, zerar as variáveis.
     // 
-    // 0: posição vazia
-    // 1:para jogador 1
-    // 2: para jogador 2
-    var tabValidado;
-
-    tabValidado = 0;
+    // 0: Posição vazia
+    // 1: jogada na Posição do jogador 1
+    // 2: jogada na Posição do jogador 2
     var velha;
-    var coluna;
     var linha;
-    var uhuTerceirinha;
+    var coluna;
+    var haVencedor;
 
-    uhuTerceirinha = false;
-    var tabuleiro =  Array(9);
-    var indice;
+    haVencedor = false;
+    var tabuleiro = createArray(9);
 
-    // Limpar/Zerar o tabuleiro
-    for (indice = 0; indice <= 8; indice++) {
-        tabuleiro[indice] = 0;
+    // Limpar/zerar o tabuleiro
+    var index;
+
+    for (index = 0; index <= 8; index++) {
+        tabuleiro[index] = 0;
     }
+    var jogador1;
+
+    jogador1 = "Jogador 1";
+    var jogador2;
+
+    jogador2 = "Jogador 2";
     var jogada;
-    var veio1;
 
-    veio1 = "Veio 1";
-    var veio2;
+    // Iniciar o jogo, definir quem joga primeiro
+    var jogadorDaVez;
 
-    veio2 = "Veio 2";
-    var veindaVez;
+    jogadorDaVez = 1;
 
-    veindaVez = 1;
-
-    // anotar/Registrar a jogada do 1º Jogador
+    // Anotar/Registrar a jogada, do primeiro jogador
     velha = 1;
     do {
-        console.log(tabuleiro[0].toString() + tabuleiro[1] + tabuleiro[2]);
-        console.log(tabuleiro[3].toString() + tabuleiro[4] + tabuleiro[5]);
-        console.log(tabuleiro[6].toString() + tabuleiro[7] + tabuleiro[8]);
+        window.alert(tabuleiro[0].ToString() + tabuleiro[1] + tabuleiro[2]);
+        window.alert(tabuleiro[3].ToString() + tabuleiro[4] + tabuleiro[5]);
+        window.alert(tabuleiro[6].ToString() + tabuleiro[7] + tabuleiro[8]);
         jogada = "";
-
-        // registrar a jogada do primeiro jogador
-        console.log("Digite a posição da sua peça JOGADOR" + veindaVez);
+        window.alert("Digite a posição da sua peça JOGADOR " + jogadorDaVez);
         jogada = window.prompt('Enter a value for jogada');
-
-        // converter a jogada texto em dois inteiros linha e coluna
         if (validaPosicao(jogada)) {
-            linha = parseInt(jogada.charAt(0));
-            coluna = parseInt(jogada.charAt(2));
-            console.log("Linha: " + linha + "; Coluna: " + coluna);
-            if (tabuleiro[3 * linha + coluna] == 0) {
-                tabuleiro[3 * linha + coluna] = veindaVez;
 
-                // verificar o tabuleiro se houver ganhador ou empate finalizar o jogo
-                tabValidado = validaTab(veindaVez, tabuleiro);
-                if (tabValidado != 2) {
-                    if (veindaVez == 1) {
-                        veindaVez = 2;
+            // Converter a jogada texto em dois inteiros linha e coluna.
+            // Simula a função Serial.parseInt() do Arduino
+            linha = parseInt(jogada.charAt(0));
+
+            // CORRIGIR O ERRO DE DIGITAÇÃO
+            coluna = parseInt(jogada.charAt(2));
+            window.alert("Linha: " + linha + "; Coluna: " + coluna);
+
+            // Verificar se a posição 'jogada' é valida
+            if (tabuleiro[3 * linha + coluna] == 0) {
+                tabuleiro[3 * linha + coluna] = jogadorDaVez;
+                if (tabuleiro[0] == jogadorDaVez && tabuleiro[1] == jogadorDaVez && tabuleiro[2] == jogadorDaVez || tabuleiro[3] == jogadorDaVez && tabuleiro[4] == jogadorDaVez && tabuleiro[5] == jogadorDaVez || tabuleiro[6] == jogadorDaVez && tabuleiro[7] == jogadorDaVez && tabuleiro[8] == jogadorDaVez) {
+                    haVencedor = true;
+                } else {
+
+                    // Verificar a jogada vencedora nas colunas.
+                    if (tabuleiro[0] == jogadorDaVez && tabuleiro[3] == jogadorDaVez && tabuleiro[6] == jogadorDaVez || tabuleiro[1] == jogadorDaVez && tabuleiro[4] == jogadorDaVez && tabuleiro[7] == jogadorDaVez || tabuleiro[2] == jogadorDaVez && tabuleiro[5] == jogadorDaVez && tabuleiro[8] == jogadorDaVez) {
+                        haVencedor = true;
                     } else {
-                        veindaVez = 1;
+
+                        // Verificar a jogada vencedora nas diagonais.
+                        if (tabuleiro[0] == jogadorDaVez && tabuleiro[4] == jogadorDaVez && tabuleiro[8] == jogadorDaVez || tabuleiro[2] == jogadorDaVez && tabuleiro[4] == jogadorDaVez && tabuleiro[6] == jogadorDaVez) {
+                            haVencedor = true;
+                        } else {
+
+                            // Trocar o jogador
+                            if (jogadorDaVez == 1) {
+                                jogadorDaVez = 2;
+                            } else {
+                                jogadorDaVez = 1;
+                            }
+                        }
                     }
                 }
-
-                // verificar a jogada vencedora nas linhas
+                velha = velha + 1;
             } else {
-                console.log("Jogada Invalida!!");
+                window.alert("Posição ocupada, jogue novamente !!!");
 
-                // informar ao jogador 1 que a posição esta preenchida e é invalida. Jogador precisa informer uma valida
+                // Informar ao Jogador 1 que a posição está preenchida, é inválida e ele precisa informar um posição válida.
             }
-            velha = velha + 1;
         } else {
-            console.log("Posição invalida");
+            window.alert("Jogada inválida !!!");
         }
 
-        // Simula a função Serial.parseInt() do Arduino
-        // Verificar se a posição "jogada" é valída
-    } while (tabValidado == 0 && velha <= 9);
-    if (velha <= 9) {
-        console.log("Parabens pela Vitória da Terceira Idade Veio" + veindaVez);
+        // Verificar a jogada vencedora nas linhas.
+    } while (!haVencedor && velha <= 9);
+
+    // Verificar o tabuleiro, se houve ganhador ou empate, finalizar o jogo.
+    if (haVencedor) {
+        window.alert("Parabéns pela a vitória, jogador " + jogadorDaVez);
     } else {
-        console.log("DEU VEIA!!!");
+        window.alert("Deu VELHA!!!");
     }
-    console.log(tabuleiro[0].t) + tabuleiro[1] + tabuleiro[2]);
-    console.log(tabuleiro[3].t) + tabuleiro[4] + tabuleiro[5]);
-    console.log(tabuleiro[6].t) + tabuleiro[7] + tabuleiro[8]);
+    window.alert(tabuleiro[0].ToString() + tabuleiro[1] + tabuleiro[2]);
+    window.alert(tabuleiro[3].ToString() + tabuleiro[4] + tabuleiro[5]);
+    window.alert(tabuleiro[6].ToString() + tabuleiro[7] + tabuleiro[8]);
 }
 
 function validaPosicao(entrada) {
+    // Função para validar a entrada da jogada por meio de texto, o formato deve ser:
+    // Primeiro caracter: 0 ou 1 ou 2
+    // Segundo caracter: qualquer um
+    // Terceiro caracter: 0 ou 1 ou 2
     var entradaValida;
 
     entradaValida = false;
-    console.log(entrada.length());
+
+    // A entra da jogadanão pode ter mais que 3 caracteres de comprimento.
     if (entrada.length() == 3) {
+
+        // Verifica o primeiro caracter se há somente caracteres válidos (0,1,2).
         if (entrada.charAt(0) == "0" || entrada.charAt(0) == "1" || entrada.charAt(0) == "2") {
+
+            // Verifica o terceiro caracter se há somente caracteres válidos (0,1,2).
             if (entrada.charAt(2) == "0" || entrada.charAt(2) == "1" || entrada.charAt(2) == "2") {
+
+                // Retorna verdadeiro se a entrada da jogada possui os caracteres e comprimentos válidos.
                 entradaValida = true;
             }
         }
     }
     
     return entradaValida;
-}
-
-function validaTab(jogadordaVez, tabuleiro) {
-    var tabValido;
-
-    tabValido = 0;
-    if (tabuleiro[0] == jogadordaVez && tabuleiro[1] == jogadordaVez && tabuleiro[2] == jogadordaVez || tabuleiro[3] == jogadordaVez && tabuleiro[4] == jogadordaVez && tabuleiro[5] == jogadordaVez || tabuleiro[6] == jogadordaVez && tabuleiro[7] == jogadordaVez && tabuleiro[8] == jogadordaVez) {
-        tabValido = 2;
-    } else {
-
-        // verificar a jogada vencedora nas colunas
-        if (tabuleiro[0] == jogadordaVez && tabuleiro[3] == jogadordaVez && tabuleiro[6] == jogadordaVez || tabuleiro[1] == jogadordaVez && tabuleiro[4] == jogadordaVez && tabuleiro[7] == jogadordaVez || tabuleiro[2] == jogadordaVez && tabuleiro[5] == jogadordaVez && tabuleiro[8] == jogadordaVez) {
-            tabValido = 2;
-        } else {
-
-            // verificar a jogada vencedora nas diagonais
-            if (tabuleiro[0] == jogadordaVez && tabuleiro[4] == jogadordaVez && tabuleiro[8] == jogadordaVez || tabuleiro[2] == jogadordaVez && tabuleiro[4] == jogadordaVez && tabuleiro[6] == jogadordaVez) {
-                tabValido = 2;
-            } else {
-
-                // Troca jogador
-            }
-        }
-    }
-    
-    return tabValido;
 }
